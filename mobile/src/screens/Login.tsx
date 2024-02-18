@@ -15,7 +15,7 @@ export function Login() {
   const { navigate } = useNavigation();
 
   async function handleLogin() {
-    return await signIn(email, password);
+    await signIn(email, password);
   }
 
   return (

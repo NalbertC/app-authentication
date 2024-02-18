@@ -53,19 +53,12 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
       const loggedUser = data.user;
       const token = data.token;
 
-      // const user = {
-      //   id: 'sdfasdfpiahsfoais',
-      //   name: 'Nlc',
-      //   email: 'nlc@email.com',
-      // };
-      // const token = 'asdfasfasfasfasfasfasfafs';
-
       AsyncStorage.setItem('user', JSON.stringify(loggedUser));
       AsyncStorage.setItem('token', token);
 
       api.defaults.headers.authorization = `Bearer ${token}`;
 
-      setUser(user);
+      setUser(loggedUser);
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 400) {

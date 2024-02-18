@@ -19,17 +19,18 @@ export default {
         name: z.string(),
         price: z.number(),
         description: z.string().optional(),
+        image: z.string().optional(),
       });
 
-      const { name, price, description } = createProductRequestBody.parse(
-        req.body
-      );
+      const { name, price, description, image } =
+        createProductRequestBody.parse(req.body);
 
       const product = await prisma.product.create({
         data: {
           name,
           price,
           description,
+          image,
         },
       });
 

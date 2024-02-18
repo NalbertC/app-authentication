@@ -22,12 +22,12 @@ export function Profile({ navigation }) {
           className="flex p-2 rounded-md h-12 w-12 items-center justify-center"
           onPress={() => navigation.goBack()}
           activeOpacity={0.8}>
-          <FontAwesome name="chevron-left" size={24} />
+          <FontAwesome name="chevron-left" size={22} />
         </TouchableOpacity>
       </Header>
       <View className="px-4 flex-1 flex items-center relative">
         <View
-          className=" w-full flex items-center absolute top-0 gap-2"
+          className="h-full w-full flex items-center absolute top-0 gap-2"
           style={{ transform: [{ translateY: -(altura / 4) }] }}>
           <Image
             onLayout={obterAltura}
@@ -40,7 +40,7 @@ export function Profile({ navigation }) {
 
           <Text className="font-bold text-3xl">{user?.name}</Text>
 
-          <View className="w-full  flex-1">
+          <View className="w-full flex-1 flex gap-2 h-ful pb-20 justify-end">
             <Button onPress={signOut}>Sair</Button>
           </View>
         </View>

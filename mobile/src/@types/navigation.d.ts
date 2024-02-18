@@ -7,6 +7,7 @@ export declare global {
       DrawerNavigator: undefined;
       Modal: undefined;
       TabNavigator: undefined;
+      addProduct: undefined;
     }
   }
 }
