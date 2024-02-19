@@ -21,7 +21,7 @@ routes.get("/users/user", ensureAuthenticated, UserController.user);
 
 // product
 routes.post("/products", ensureAuthenticated, ProductController.create);
-routes.get("/products", ProductController.index);
+routes.get("/products", ensureAuthenticated, ProductController.index);
 
 // forgot password
 routes.post("/forgot_pass", RedefinePassController.forgot);

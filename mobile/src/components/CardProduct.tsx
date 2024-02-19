@@ -1,7 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
 import { Dimensions, Image, Text, TouchableOpacity, View } from 'react-native';
-import { name } from 'tailwindcss';
 
 import { Product } from '~/screens/Home';
 
@@ -25,7 +24,7 @@ export function CardProduct({ id, price, image, name }: CardProductProps) {
         />
       </View>
       <View className=" w-full flex gap-1 " style={{ height: (WEIGHT_IMAGE / (2 / 3) - 40) / 4 }}>
-        <Text className="font-bold text-lg">{name}</Text>
+        <Text className="font-bold text-base">{name}</Text>
         <View className="flex flex-row justify-between ">
           <Text className="text-lg">
             {new Intl.NumberFormat('pt-BR', {

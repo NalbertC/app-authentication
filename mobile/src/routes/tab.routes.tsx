@@ -98,19 +98,4 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 3, // Esta propriedade é específica do Android para elevar a sombra
   },
-  tabBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: 'lightblue',
-    height: 60,
-  },
-  tabItem: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  tabItemFocused: {
-    backgroundColor: 'lightgray',
-  },
 });

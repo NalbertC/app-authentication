@@ -1,7 +1,8 @@
 import { Feather, FontAwesome } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { RefreshControl, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 import { CardProduct } from '~/components/CardProduct';
 import { Header } from '~/components/Header';
@@ -22,19 +23,33 @@ export function Home({ navigation }) {
 
   const [products, setProducts] = useState<Product[]>([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     (async () => {
-      try {
-        const { data } = await api.get('products');
-        setProducts(data);
-      } catch (error) {
-        console.log('Caiu aqui', error);
-      } finally {
-        setLoadingProducts(false);
-      }
+      await fecthData();
     })();
   }, []);
+
+  async function fecthData() {
+    try {
+      const token = await AsyncStorage.getItem('token');
+
+      api.defaults.headers.authorization = `Bearer ${token}`;
+      const { data } = await api.get('/products');
+      console.log('aqui');
+      setProducts(data);
+    } catch (error) {
+      console.log('Caiu aqui', error);
+    } finally {
+      setLoadingProducts(false);
+    }
+  }
+  async function handleRefresh() {
+    setRefreshing(true);
+    await fecthData();
+    setRefreshing(false);
+  }
 
   return (
     <View className="flex-1 bg-background">
@@ -58,7 +73,10 @@ export function Home({ navigation }) {
             <Feather name="plus" size={28} />
           </TouchableOpacity>
         </View>
-        <ScrollView className="px-5 flex-1 ">
+        <ScrollView
+          className="px-5 flex-1 "
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
+          showsVerticalScrollIndicator={false}>
           <View className="flex flex-row flex-wrap justify-between pb-24">
             {products.map((product, i) => (
               <CardProduct

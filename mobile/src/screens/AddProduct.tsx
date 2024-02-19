@@ -28,22 +28,20 @@ export function AddProduct({ navigation }: AddProductProps) {
     const token = await AsyncStorage.getItem('token');
 
     try {
-      const { data } = await api.post(
-        '/products',
-        {
-          name,
-          price: Number(price),
-          description,
-          image,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      api.defaults.headers.authorization = `Bearer ${token}`;
+      const { data } = await api.post('/products', {
+        name,
+        price: Number(price),
+        description,
+        image,
+      });
 
       Alert.alert('Sucesso', 'Produto adicionado');
+
+      setName('');
+      setImage('');
+      setPrice('');
+      setDescription('');
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
